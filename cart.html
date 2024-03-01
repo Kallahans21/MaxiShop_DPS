@@ -24,6 +24,7 @@
             <div id="product-list">
             </div>
         </div>
+        
     
         <div id="cart" class="hidden">
             <h2>Shopping Cart</h2>
@@ -31,7 +32,7 @@
             </div>
             <p>Total: $<span id="cart-total">0.00</span></p>
             <button onclick="checkout()">Checkout</button>
-        </div>
+        </div> 
     </div>
     
     <!--html2 pdf and jsPDF library -->
@@ -39,8 +40,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
     <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
     <!--SweetAlert2 library -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <!--JavaScript file -->
+
+    <!-- pdfMake library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+
     <script src="cart.js"></script>
 </body>
 </html>

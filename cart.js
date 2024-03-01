@@ -31,7 +31,7 @@ function renderProductList() {
     predefinedProducts.forEach((product, index) => {
         const productItem = document.createElement('div');
         productItem.className = 'product-item';
-        const availableQuantity = product.quantity - getCartQuantity(product.name);
+        const availableQuantity = product.quantity;
         productItem.innerHTML = `
             <div class="product-info">
                 <p>${product.name} - $${product.price.toFixed(2)} (<span class="available-quantity" id="available-quantity-${index}">${availableQuantity}</span> available)</p>
@@ -150,73 +150,90 @@ function checkout() {
     });
 }
 
-function downloadPDF(invoice) {
-    const pdfContent = document.createElement('div');
-    pdfContent.style.fontFamily = 'Arial, sans-serif';
+function downloadPDF() {
+    var now = new Date();
+    // Formatos para mostrar en el PDF
+    var fechaParaPDF = now.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    var horaParaPDF = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-    const header = document.createElement('div');
-    header.style.display = 'flex';
-    header.style.justifyContent = 'space-between';
-    header.innerHTML = `
-        <div>
-            <h2>Maxi Shop</h2>
-            <p>The best place to buy</p>
-        </div>
-        <div>
-            <p>Date: ${new Date().toLocaleDateString()}</p>
-            <p>Hour: ${new Date().toLocaleTimeString()}</p>
-        </div>
-    `;
-    pdfContent.appendChild(header);
+    // Formatos para el nombre del archivo
+    var fechaParaArchivo = fechaParaPDF.replace(/\//g, '-');
+    var horaParaArchivo = horaParaPDF.replace(/:/g, '-');
 
-    const table = document.createElement('table');
-    table.style.width = '100%';
-    table.style.marginTop = '20px';
-    table.style.borderCollapse = 'collapse';
+    var docDefinition = { 
+        
+        content: [
+            { text: 'Maxi Shop', style: 'header', alignment: 'center' },
+            { text: `Fecha: ${fechaParaPDF}`, style: 'subheader', alignment: 'right' },
+            { text: `Hora: ${horaParaPDF}`, style: 'subheader', alignment: 'right' },
+            { text: 'Factura', style: 'invoiceTitle', margin: [0, 20, 0, 10] },
+            {
+                style: 'itemsTable',
+                table: {
+                    widths: ['*', 'auto', 'auto', 'auto'],
+                    body: [
+                        [{ text: 'Item', style: 'itemsTableHeader' }, { text: 'Precio', style: 'itemsTableHeader' }, { text: 'Cantidad', style: 'itemsTableHeader' }, { text: 'Total', style: 'itemsTableHeader' }],
+                        ...cart.map(item => ([item.name, `$${item.price.toFixed(2)}`, item.quantity, `$${(item.price * item.quantity).toFixed(2)}`]))
+                    ]
+                },
+                layout: 'lightHorizontalLines'
+            },
+            {
+                columns: [
+                    { text: '' },
+                    { text: `Total: $${cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}`, style: 'total', alignment: 'right' }
+                ],
+                margin: [0, 20, 0, 0]
+            },
+            { 
+                text: 'Gracias por su compra',
+                style: 'thankYou',
+                alignment: 'center',
+                margin: [0, 20, 0, 0]
+            }
+        ],
+        styles: {
+            header: {
+                fontSize: 22,
+                bold: true
+            },
+            subheader: {
+                fontSize: 10,
+                margin: [0, 2, 0, 0]
+            },
+            invoiceTitle: {
+                fontSize: 18,
+                bold: true,
+                decoration: 'underline',
+                color: '#4caf50'
+            },
+            itemsTable: {
+                margin: [0, 5, 0, 15]
+            },
+            itemsTableHeader: {
+                bold: true,
+                fontSize: 12,
+                color: 'black'
+            },
+            total: {
+                bold: true,
+                fontSize: 12
+            },
+            thankYou: {
+                bold: true,
+                fontSize: 14,
+                color: '#4caf50'
+            }
+        },
+        defaultStyle: {
+            columnGap: 20
+        }
+    };
 
-    const tableHeader = document.createElement('tr');
-    ['Item', 'Price', 'Quant'].forEach(headerText => {
-        const th = document.createElement('th');
-        th.style.border = '1px solid #dddddd';
-        th.style.padding = '8px';
-        th.textContent = headerText;
-        tableHeader.appendChild(th);
-    });
-    table.appendChild(tableHeader);
-
-    cart.forEach(item => {
-        const row = document.createElement('tr');
-        ['name', 'price', 'quantity'].forEach(key => {
-            const td = document.createElement('td');
-            td.style.border = '1px solid #dddddd';
-            td.style.padding = '8px';
-            td.textContent = item[key];
-            row.appendChild(td);
-        });
-        table.appendChild(row);
-    });
-
-    pdfContent.appendChild(table);
-
-    const totalParagraph = document.createElement('p');
-    totalParagraph.style.textAlign = 'right';
-    totalParagraph.style.marginTop = '20px';
-    totalParagraph.innerHTML = `<strong>TOTAL: $${getTotal()}</strong>`;
-    pdfContent.appendChild(totalParagraph);
-
-    html2pdf(pdfContent, {
-        margin: 10,
-        filename: 'invoice.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        output: 'save'
-    });
-
-    function getTotal() {
-        return cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
-    }
+    var fileName = `Factura(Fecha${fechaParaArchivo})(Hora${horaParaArchivo}).pdf`;
+    pdfMake.createPdf(docDefinition).download(fileName);
 }
+
 
 function generateInvoice() {
     let invoiceText = 'Invoice:\n';
