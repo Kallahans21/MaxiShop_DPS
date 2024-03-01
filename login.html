@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="login.css">
+    <title>Login - Maxi Shop</title>
+</head>
+<body>
+    <div class="container text-center mt-5 login-container">
+        <h2 class="mb-4">Welcome to Maxi Shop!</h2>
+        <p>Please enter your credentials</p>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">User:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document"> <!-- Clase agregada aquí -->
+          <div class="modal-content">
+            
+            <div class="modal-header text-center">
+                <h5 class="modal-title w-100" id="loginModalLabel">Ingreso a Maxi Shop</h5>
+              </div>
+            <div class="modal-body">
+            <div class="progress" style="height: 20px; background-color: #f8f9fa;">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; transition: width 2s;">
+                Procesando...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

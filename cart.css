@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre los contenedores */
+    padding: 20px;
+}
+
+.container, #cart {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* Ajusta según necesidades */
+}
+
+.container {
+    flex: 2; /* Tomará dos tercios del espacio disponible */
+}
+
+#cart {
+    flex: 1; /* Tomará un tercio del espacio disponible */
+    max-width: 300px; /* O el ancho fijo que prefieras */
+}
+
+#product-list, #cart-items {
+    margin-bottom: 10px;
+}
+
+.cart-item, .product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+}
+
+.cart-item button, .product-item button {
+    margin-left: 10px; /* Espacio entre el texto y el botón de eliminar */
+    padding: 5px 10px;
+    background-color: #f44336; /* Color rojo para el botón de eliminar */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Agregado para redondear los bordes del botón */
+    cursor: pointer;
+}
+
+.cart-item button i, .product-item button i {
+    margin-right: 5px;
+}
+
+button {
+    background-color: #4caf50; /* Color verde para los demás botones */
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.navbar-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right i {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 20px; /* Ajusta el tamaño del icono según sea necesario */
+}
+
+#cart-total {
+    margin-right: 20px;
+    font-size: 18px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .container, #cart {
+        width: 90%; /* Ajuste para pantallas más pequeñas */
+        margin: 10px auto; /* Centrar los contenedores en pantallas pequeñas */
+    }
+}
