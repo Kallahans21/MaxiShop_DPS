@@ -1,25 +1,15 @@
-body{
+body {
     height: 100%;
-    margin: 0;
+    margin: 40px 0; 
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
     background: linear-gradient(to right, #74ebd5, #acb6e5);
-    
 }
 
-html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
-}
-
-.login-container {
-    background-color: transparent;
+.container.login-container {
+    background-color: #fff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,21 +21,9 @@ html {
     justify-content: center;
 }
 
-
-.container {
-    background-color: #fff;
-    padding: 40px 60px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-}
-
 form {
     width: 100%;
+    max-width: 400px;
 }
 
 h2 {
@@ -59,8 +37,9 @@ label {
     color: #333;
 }
 
-input[type="text"], input[type="password"] {
-    width: calc(100% - 20px);
+input[type="text"],
+input[type="password"] {
+    width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -88,5 +67,4 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
+}

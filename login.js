@@ -14,7 +14,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         }, 2000); 
     } else {
         
-        document.querySelector('.modal-body').innerHTML = '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. Por favor, inténtalo de nuevo.</div>';
+        document.querySelector('.modal-body').innerHTML = '<div class="alert alert-danger" role="alert">Invalid username or password. Please try again.</div>';
         $('#loginModal').modal('show');
     }
 });
