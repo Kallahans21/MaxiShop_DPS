@@ -62,7 +62,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Estilos adicionales para centrar el modal si es necesario */
+/* Estilos adicionales para centrar el modal */
 .modal-dialog {
     display: flex;
     align-items: center;

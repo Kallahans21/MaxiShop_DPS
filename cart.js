@@ -1,4 +1,4 @@
-
+// Array with list of products, price and quantity
 const predefinedProducts = [
     { name: 'Auriculares inalámbricos Bluetooth Soundcore Liberty Neo', price: 59.99, quantity: 10 },
     { name: 'Ratón gaming Logitech G502 Hero', price: 79.99, quantity: 10 },
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let cart = [];
 
+// Function that renders the list of products in the DOM
 function renderProductList() {
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
@@ -53,6 +54,7 @@ function addToCart(index) {
         return;
     }
 
+    // Validation to not enter more products than exist
     if (quantity > product.quantity) {
         alert("Cannot add more items to the cart than available in stock.");
         return;
@@ -65,7 +67,7 @@ function addToCart(index) {
         cart.push({ ...product, quantity });
     }
 
-    // Reduce la cantidad disponible en predefinedProducts
+    // Reduce the quantity available in predefined Products
     product.quantity -= quantity;
 
     updateCartDisplay(); 
@@ -83,6 +85,7 @@ function removeFromCart(index) {
     
     cart.splice(index, 1);
 
+    // To update the user interface
     updateAvailableQuantity();
     updateCartDisplay();
     renderProductList();
@@ -152,11 +155,11 @@ function checkout() {
 
 function downloadPDF() {
     var now = new Date();
-    // Formatos para mostrar en el PDF
+    // Formats to display in the PDF
     var fechaParaPDF = now.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
     var horaParaPDF = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-    // Formatos para el nombre del archivo
+    // File name formats
     var fechaParaArchivo = fechaParaPDF.replace(/\//g, '-');
     var horaParaArchivo = horaParaPDF.replace(/:/g, '-');
 

@@ -9,7 +9,7 @@ body {
     justify-content: center;
     gap: 20px; /* Espacio entre los contenedores */
     padding: 20px;
-}
+} 
 
 .container, #cart {
     background-color: #fff;
